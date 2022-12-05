@@ -38,6 +38,11 @@ void Eteint_Led(){
     PORTC &= ~_BV(PC2); // LE == 0
 }
 
+void envoie_Led(uint8_t data1, uint8_t data2){
+    SPI_MasterTransmit(data1);
+    SPI_MasterTransmit(data2);
+}
+
 
 void main(){
     SPI_MasterInit();
@@ -47,13 +52,12 @@ void main(){
     char b=0;
     int i=0;
     while (1){
-        SPI_MasterTransmit(a);
-        SPI_MasterTransmit(b);
+        envoie_Led(a,b);
         PORTC |= _BV(PC2); // LE == 1
         PORTC &= ~_BV(PC2); // LE == 0
         _delay_ms(500);
         a = 1 << i;
         i++;
-        i=i%8;
+        i = i%8;
     }
 }
