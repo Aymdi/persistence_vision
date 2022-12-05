@@ -45,7 +45,7 @@ int main(void)
     USART_Init(MYUBRR);
     while (1) {
         data = USART_Receive();
-        USART_Transmit(data2);
+        USART_Transmit(data);
         if (data == 'a') {
             PORTB = 0b00000001;
         } else if (data == 'c') {
