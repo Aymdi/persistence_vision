@@ -5,8 +5,10 @@
 #include <stdint.h>
 #include <avr/io.h>
 #include <util/delay.h>
+#include "buffer.h"
 
 char data;
+struct RingBuffer buffer;
 
 void USART_Init(unsigned int ubrr)
 {
@@ -39,11 +41,15 @@ void USART_Transmit(char data)
 
 int main(void)
 {
+    
     DDRB  = 0b00000001;
     PORTB = 0b00000000;
     USART_Init(MYUBRR);
+    ringBufferInit(&buffer);
     while (1) {
-        data = USART_Receive();
-        USART_Transmit(data);
+        ringBufferWrite(&buffer, USART_Receive());
+        if (ringBufferAvailable(&buffer)){
+            USART_Transmit(ringBufferRead(&buffer));
+        }
     }
 }
