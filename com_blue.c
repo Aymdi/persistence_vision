@@ -7,7 +7,6 @@
 #include <util/delay.h>
 
 char data;
-char data2 = 'b';
 
 void USART_Init(unsigned int ubrr)
 {
@@ -46,10 +45,5 @@ int main(void)
     while (1) {
         data = USART_Receive();
         USART_Transmit(data);
-        if (data == 'a') {
-            PORTB = 0b00000001;
-        } else if (data == 'c') {
-            PORTB = 0b00000000;
-        }
     }
 }
