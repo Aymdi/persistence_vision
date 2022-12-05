@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <util/delay.h>
 #include <stdint.h>
-#include "com_blue"
 
 
 // SDI == MOSI == PB3
@@ -43,8 +42,18 @@ void Eteint_Led(){
 void main(){
     SPI_MasterInit();
     PORTC &= ~_BV(PC1); // /OE == 0
-    PORTC |= _BV(PC2); // LE == 1
-    SPI_MasterTransmit(0b00000000);
-    delay_ms(10);
-    SPI_MasterTransmit(0b00000001);
+    PORTC &= ~_BV(PC2); // LE == 0
+    char a=1;
+    char b=0;
+    int i=0;
+    while (1){
+        SPI_MasterTransmit(a);
+        SPI_MasterTransmit(b);
+        PORTC |= _BV(PC2); // LE == 1
+        PORTC &= ~_BV(PC2); // LE == 0
+        _delay_ms(500);
+        a = 1 << i;
+        i++;
+        i=i%8;
+    }
 }
