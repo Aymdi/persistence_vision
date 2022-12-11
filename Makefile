@@ -2,7 +2,7 @@ SRC_DIR=./src
 TST_DIR=./test
 
 BIN=main
-OBJS=main.o
+OBJS=main.o effet_Hall.o
 
 CC=avr-gcc
 OBJCOPY=avr-objcopy
@@ -15,7 +15,7 @@ $(BIN).hex: $(BIN).elf
 	$(OBJCOPY) -O ihex -R .eeprom $< $@
 
 $(BIN).elf: $(OBJS)
-	$(CC) -mmcu=atmega328p -o $@ $<
+	$(CC) -mmcu=atmega328p -o $@ $(OBJS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c -o $@ $<
