@@ -9,9 +9,9 @@ int main() {
     while(1){
 
         PORTD = PORTD | _BV(PD6);
-        _delay_ms(500);
+        _delay_ms(2000);
         PORTD = PORTD & ~ (_BV(PD6));
-        _delay_ms(500);
+        _delay_ms(2000);
         
     }
 
