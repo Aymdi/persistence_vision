@@ -1,21 +1,27 @@
-BIN=led_test_PD6
-OBJS=led_test_PD6.o test.o
+SRC_DIR=./src
+TST_DIR=./test
+
+BIN=main
+OBJS=main.o
 
 CC=avr-gcc
 OBJCOPY=avr-objcopy
 CFLAGS=-Os -DF_CPU=13000000UL -mmcu=atmega328p
-PORT=/dev/ttyACM0
 
-all: 
 
-${BIN}.hex: ${BIN}.elf
-    ${OBJCOPY} -O ihex -R .eeprom $< $@
+all: $(BIN).hex
 
-${BIN}.elf: ${OBJS}
-    ${CC} -o $@ $^
+$(BIN).hex: $(BIN).elf
+	$(OBJCOPY) -O ihex -R .eeprom $< $@
 
-install: ${BIN}.hex
-	avrdude -F -V -c usbasp -p ATMEGA328P -P ${PORT} -b 115200 -U flash:w:$<
+$(BIN).elf: $(OBJS)
+	$(CC) -mmcu=atmega328p -o $@ $<
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+install: main.hex
+	avrdude -F -V -c usbasp -p ATMEGA328P -P -b 115200 -U flash:w:main.hex
 
 clean:
-    rm -f ${BIN}.elf ${BIN}.hex ${OBJS}
+	rm -f $(BIN).elf *.o *.hex ${OBJS}
