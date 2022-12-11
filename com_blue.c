@@ -1,14 +1,4 @@
-#define F_CPU 13000000UL // Clock Speed
-#define BAUD 38400
-#define MYUBRR F_CPU/16/BAUD-1
-
-#include <stdint.h>
-#include <avr/io.h>
-#include <util/delay.h>
-#include "buffer.h"
-
-char data;
-struct RingBuffer buffer;
+#include "com_blue.h"
 
 void USART_Init(unsigned int ubrr)
 {
@@ -38,7 +28,7 @@ void USART_Transmit(char data)
     /* Put data into buffer, sends the data */
     UDR0 = data;
 }
-
+/*
 int main(void)
 {
     
@@ -53,3 +43,4 @@ int main(void)
         }
     }
 }
+*/

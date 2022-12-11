@@ -2,7 +2,7 @@ SRC_DIR=./src
 TST_DIR=./test
 
 BIN=main
-OBJS=main.o effet_Hall.o
+OBJS=main.o effet_Hall.o com_blue.o buffer.o
 
 CC=avr-gcc
 OBJCOPY=avr-objcopy
