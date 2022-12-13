@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <util/delay.h>
 #include <stdint.h>
+#include "spi.h"
 
 
 // SDI == MOSI == PB3
@@ -43,7 +44,7 @@ void envoie_Led(uint8_t data1, uint8_t data2){
     SPI_MasterTransmit(data2);
 }
 
-
+/*
 void main(){
     SPI_MasterInit();
     PORTC &= ~_BV(PC1); // /OE == 0
@@ -61,3 +62,4 @@ void main(){
         i = i%8;
     }
 }
+*/
