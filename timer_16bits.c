@@ -1,6 +1,8 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
+
+/*
 int main(void)
 {
 	DDRB = 0x01;
@@ -22,4 +24,4 @@ int main(void)
 ISR(TIMER1_COMPA_vect)
 {
 	PORTB ^= (1 << PORTB0);
-}
+}*/

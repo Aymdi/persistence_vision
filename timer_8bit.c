@@ -1,8 +1,8 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
+#include "timer_8bit.h"
 
-int extraTime = 0;
-
+/*
 int main(void)
 {
 	cli(); //pour desactiver toutes les interruptions globalement
@@ -20,7 +20,7 @@ int main(void)
     {
         //code d'application : boucle principale
     }
-}
+}*/
 
 ISR(TIMER0_COMPA_vect) // c'est une interruption qui s'active quand 
 //le compteur du timer0 arrive à sa valeur max predefinie(autoreload)
