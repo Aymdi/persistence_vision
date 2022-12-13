@@ -36,7 +36,6 @@ void init_interrupt(){
 ISR(TIMER0_COMPA_vect){// c'est une interruption qui s'active quand 
 //le compteur du timer0 arrive à sa valeur max predefinie(autoreload)
     TCNT0 = 0; // s'incrèmente à une une frequence 13MHz/prescaler 
-    envoie_Led(0b11000000,0);
     compteur_secondes++;
 
 }
@@ -51,6 +50,7 @@ void init_seconds(void){
 ISR(TIMER1_COMPA_vect){// c'est une interruption qui s'active quand 
 //le compteur du timer1 arrive à sa valeur max predefinie(autoreload)
     TCNT1 = 0;
+    //envoie_Led(0b11111111,0b11111111);
     extraTime++;
 }
 
@@ -82,15 +82,49 @@ int main(void){
         if((!(PIND & _BV(PD2)))) //logique inverse : signal HALL =1 => pas d'aimant, si Hall =0 alors présence aimant)
         {   
             //x++; //pour la vitesse de rotation
-            envoie_Led(0b11111111,0b11111111);
+           
+            _delay_ms(11.8);//premier quadrant
             PORTC |= _BV(PC2); // LE == 1
             PORTC &= ~_BV(PC2); // LE == 0
-            _delay_ms(50);
-            envoie_Led(0b00000000,0b00000000);
+            envoie_Led(0b11110000,0b00000000);
+            envoie_Led(0b11110001,0b11111111);
+            _delay_ms(0.1);
             PORTC |= _BV(PC2); // LE == 1
             PORTC &= ~_BV(PC2); // LE == 0
+            envoie_Led(0b10000000,0b00000000);
+
+
+            _delay_ms(13.2);//deuxième quadrant
+            PORTC |= _BV(PC2); // LE == 1
+            PORTC &= ~_BV(PC2); // LE == 0
+            envoie_Led(0b11110000,0b00000000);
+            _delay_ms(0.1);
+            PORTC |= _BV(PC2); // LE == 1
+            PORTC &= ~_BV(PC2); // LE == 0
+            envoie_Led(0b10000000,0b00000000);
+
+            _delay_ms(13);//troisième quadrant
+            PORTC |= _BV(PC2); // LE == 1
+            PORTC &= ~_BV(PC2); // LE == 0
+            envoie_Led(0b11110000,0b00000000);
+            envoie_Led(0b11110000,0b00000011);
+            _delay_ms(0.1);
+            PORTC |= _BV(PC2); // LE == 1
+            PORTC &= ~_BV(PC2); // LE == 0
+            envoie_Led(0b10000000,0b00000000);
+
+            _delay_ms(13);//quatrième quadrant
+            PORTC |= _BV(PC2); // LE == 1
+            PORTC &= ~_BV(PC2); // LE == 0
+            envoie_Led(0b11110000,0b00000000);
+            envoie_Led(0b11110000,0b00001111);
+            _delay_ms(0.1);
+            PORTC |= _BV(PC2); // LE == 1
+            PORTC &= ~_BV(PC2); // LE == 0
+            envoie_Led(0b10000000,0b00000000);
             //USART_Transmit(x);
     }
+    
     }
 
     return 0;
