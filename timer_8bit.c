@@ -27,9 +27,4 @@ ISR(TIMER0_COMPA_vect) // c'est une interruption qui s'active quand
 {
 	extraTime++;
 	
-	if(extraTime > 100)
-	{
-		extraTime = 0;
-		PORTB ^= (1 << PORTB0);
-	}
 }

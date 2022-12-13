@@ -2,6 +2,7 @@
 #define BUFFER_H
 
 #define RING_BUFFER_SIZE 32
+struct RingBuffer* buffer;
 
 struct RingBuffer{
     unsigned char buffer[RING_BUFFER_SIZE];

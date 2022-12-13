@@ -14,7 +14,6 @@
 // SCK == PB5
 // LE == PC2
 
-struct RingBuffer buffer;
 
 
 void Eteint_Led(){
@@ -49,8 +48,14 @@ void SPI_MasterTransmit(char cData)
 
 
 void envoie_Led(uint8_t data1, uint8_t data2){
+
+    PORTC |= (1<<PORTC1);
     SPI_MasterTransmit(data1);
     SPI_MasterTransmit(data2);
+    PORTC |= (1<<PORTC2);
+    PORTC &= ~(1<<PORTC2);
+    PORTC &= ~(1<<PORTC1);
+
 }
 
 
@@ -64,7 +69,7 @@ void envoie_Led(uint8_t data1, uint8_t data2){
 
 
 
-void printLetter(char letter[])
+/*void printLetter(char letter[])
 {
     int y;
     // printing the first y row of the letter
@@ -79,9 +84,9 @@ void printLetter(char letter[])
     //SPI_MasterTransmit(0);
     envoie_Led(0b00000000 , 0b00000000);
     _delay_ms(4);
-}
+}*/
 
-void main(){
+/*void main(){
 
     SPI_MasterInit();
     PORTC &= ~_BV(PC1); // /OE == 0
@@ -116,5 +121,5 @@ void main(){
         i++;
         i = i%8;
     }
-}
+}*/
 

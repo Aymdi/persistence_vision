@@ -1,4 +1,4 @@
-#include <avr/io.h>
+/*#include <avr/io.h>
 #include <util/delay.h>
 
 //faire clignoter la led rouge par effet hall
@@ -17,17 +17,17 @@ void effet_Hall() {
             }
     }
 
-}
+}*/
 
 
 //version avec interruption 
 #include "com_blue.h"
+#include "effet_Hall.h"
 #include <avr/io.h>
 #include <util/delay.h>
 #include <avr/interrupt.h>
 #include <stdio.h>
 
-int hall_detect = 0;
 
 void init_hall()
 {
@@ -42,6 +42,7 @@ void init_hall()
     sei();  
 }
 
-ISR(INT0_vect){
-    hall_detect++;
+ISR(INT0_vect){//lorsqu'on passe devant l'aimant, on allume la led 1
+
+    detection_Hall++;
 }

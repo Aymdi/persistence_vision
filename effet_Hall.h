@@ -1,18 +1,10 @@
-#ifndef EFFET_HALL_H
-#define EFFET_HALL_H
-
-
-void effet_Hall();
-
-
-#endif
-
-
 // version avec interruption
-#ifndef HALL_H
-#define HALL_H
+#ifndef EFF_HALL_H
+#define EFF_HALL_H
 
 extern int hall_detect;
+
+int detection_Hall;
 
 void init_hall();
 
